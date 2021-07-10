@@ -15,6 +15,13 @@ namespace Net.RabbitMQ.Wrapper
         private readonly IModel _model;
 
         public MqPublisher(
+            IMqConnection mqConnection,
+            string exchange,
+            string exchangeType
+            ) : this(mqConnection, exchange, exchangeType, 50000) 
+        { }
+
+        public MqPublisher(
             IMqConnection mqConnection, 
             string exchange, 
             string exchangeType, 
