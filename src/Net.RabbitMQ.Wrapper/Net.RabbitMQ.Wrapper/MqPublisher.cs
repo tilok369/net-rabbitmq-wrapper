@@ -31,7 +31,7 @@ namespace Net.RabbitMQ.Wrapper
             _model.ExchangeDeclare(_exchange, exchangeType, arguments: ttl);
         }
 
-        public void Publish(string routingKey, string message, IDictionary<string, object> headerAttributes, int expirationTime)
+        public void Publish(string routingKey, string message, IDictionary<string, object> headerAttributes, int expirationTime = 50000)
         {
             var body = Encoding.UTF8.GetBytes(message);
             var properties = _model.CreateBasicProperties();
