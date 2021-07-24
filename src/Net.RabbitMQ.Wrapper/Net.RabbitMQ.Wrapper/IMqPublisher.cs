@@ -8,6 +8,6 @@ namespace Net.RabbitMQ.Wrapper
 {
     public interface IMqPublisher: IDisposable
     {
-        void Publish(string routingKey, string message, IDictionary<string, object> headerAttributes, int expirationTime);
+        void Publish(string routingKey, string message, IDictionary<string, object> headerAttributes, int expirationTime = 50000);
     }
 }
