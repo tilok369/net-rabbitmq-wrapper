@@ -5,7 +5,7 @@
 
 Direct use without DI
 ----------------------
-```
+```C#
 var mqConnection = new MqConnection("your_connection_url");
 
  var publisher = new MqPublisher(mqConnection, "your-exchange-name", ExchangeType.Topic);
@@ -26,22 +26,24 @@ var mqConnection = new MqConnection("your_connection_url");
 
 With Dependency Injection in .NET Core/.NET 5
 ---------------------------------------------
-```
+```C#
 services.AddSingleton<IMqConnection>(new MqConnection("your_connection_url"));
+
 services.AddSingleton<IMqPublisher>(x => new MqPublisher(x.GetService<IMqConnection>(),
    "you_exchange_name", ExchangeType.Topic));
+   
 services.AddSingleton<IMqSubscriber>(x => new MqSubscriber(x.GetService<IMqConnection>(),
     "your_exchange_name", "your_queue_name", "your_routing_key", ExchangeType.Topic));
 ```
 
 Publish
 --------
-```
+```C#
 _publisher.Publish("loan_account.created", JsonConvert.SerializeObject("your_object"));
 ```
 
 Subscribe
 ---------
-```
+```C#
 _subscriber.Subscribe(Your_Subscription_Event_Method());
 ```
