@@ -48,8 +48,8 @@ Subscribe
 _subscriber.Subscribe(Your_Subscription_Event_Method());
 ```
 
-# Installation
-Install from nuget:
+# Installation-Nuget
+
 <span style="color:blue">Install-Package Net.RabbitMQ.Wrapper -Version 1.0.0</span>
 
 # Contribution
