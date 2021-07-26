@@ -47,3 +47,6 @@ Subscribe
 ```C#
 _subscriber.Subscribe(Your_Subscription_Event_Method());
 ```
+
+# Contribution
+Any kind of contribution is welcomed!
