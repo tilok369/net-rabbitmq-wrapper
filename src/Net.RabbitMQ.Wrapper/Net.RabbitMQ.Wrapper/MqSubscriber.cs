@@ -16,7 +16,29 @@ namespace Net.RabbitMQ.Wrapper
         private string _queue;
         private IModel _model;
 
+        /// <summary>
+        /// This constructor initializes Subscriber with default Topic exchange and predefined expiration time and prefetch size
+        /// </summary>
+        /// <param name="mqConnection"></param>
+        /// <param name="exchange"></param>
+        /// <param name="queue"></param>
+        /// <param name="routingKey"></param>
+        public MqSubscriber(
+            IMqConnection mqConnection,
+            string exchange,
+            string queue,
+            string routingKey
+            ) : this(mqConnection, exchange, queue, routingKey, ExchangeType.Topic, 50000, 10)
+        { }
 
+        /// <summary>
+        /// This constructor initializes Subscriber with predefined expiration time and prefetch size
+        /// </summary>
+        /// <param name="mqConnection"></param>
+        /// <param name="exchange"></param>
+        /// <param name="queue"></param>
+        /// <param name="routingKey"></param>
+        /// <param name="exchangeType"></param>
         public MqSubscriber(
             IMqConnection mqConnection,
             string exchange,
@@ -26,6 +48,16 @@ namespace Net.RabbitMQ.Wrapper
             ) : this(mqConnection, exchange, queue, routingKey, exchangeType, 50000, 10)
         { }
 
+        /// <summary>
+        /// This constructor needs everything to be set via params
+        /// </summary>
+        /// <param name="mqConnection"></param>
+        /// <param name="exchange"></param>
+        /// <param name="queue"></param>
+        /// <param name="routingKey"></param>
+        /// <param name="exchangeType"></param>
+        /// <param name="expiration"></param>
+        /// <param name="prefetchSize"></param>
         public MqSubscriber(
             IMqConnection mqConnection,
             string exchange,
@@ -54,6 +86,10 @@ namespace Net.RabbitMQ.Wrapper
             _model.BasicQos(0, prefetchSize, false);
         }
 
+        /// <summary>
+        /// Subcribe function with event receiver parameter
+        /// </summary>
+        /// <param name="receiver">Receiver event Func</param>
         public void Subscribe(Func<string, IDictionary<string, object>, bool> receiver)
         {
             var consumer = new EventingBasicConsumer(_model);

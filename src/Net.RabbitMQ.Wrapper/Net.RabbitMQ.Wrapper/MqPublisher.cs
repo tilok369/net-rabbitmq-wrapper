@@ -14,6 +14,23 @@ namespace Net.RabbitMQ.Wrapper
         private readonly string _exchange;
         private readonly IModel _model;
 
+        /// <summary>
+        /// This constructor initializes Publisher with default Topic exchange and predefined expiration time of 50000
+        /// </summary>
+        /// <param name="mqConnection"></param>
+        /// <param name="exchange"></param>
+        public MqPublisher(
+            IMqConnection mqConnection,
+            string exchange
+            ) : this(mqConnection, exchange, ExchangeType.Topic, 50000)
+        { }
+
+        /// <summary>
+        /// This constructor initializes Publisher with predefined expiration time of 50000
+        /// </summary>
+        /// <param name="mqConnection"></param>
+        /// <param name="exchange"></param>
+        /// <param name="exchangeType"></param>
         public MqPublisher(
             IMqConnection mqConnection,
             string exchange,
@@ -21,6 +38,13 @@ namespace Net.RabbitMQ.Wrapper
             ) : this(mqConnection, exchange, exchangeType, 50000) 
         { }
 
+        /// <summary>
+        /// In this constructor evrything needs to be set
+        /// </summary>
+        /// <param name="mqConnection"></param>
+        /// <param name="exchange"></param>
+        /// <param name="exchangeType"></param>
+        /// <param name="experation"></param>
         public MqPublisher(
             IMqConnection mqConnection, 
             string exchange, 
@@ -38,6 +62,13 @@ namespace Net.RabbitMQ.Wrapper
             _model.ExchangeDeclare(_exchange, exchangeType, arguments: ttl);
         }
 
+        /// <summary>
+        /// Publisher function
+        /// </summary>
+        /// <param name="routingKey">Routing Key</param>
+        /// <param name="message">Publishing message</param>
+        /// <param name="headerAttributes">Header attributes</param>
+        /// <param name="expirationTime">Expiration time</param>
         public void Publish(string routingKey, string message, IDictionary<string, object> headerAttributes, int expirationTime = 50000)
         {
             var body = Encoding.UTF8.GetBytes(message);
