@@ -1,6 +1,6 @@
 # net-rabbitmq-wrapper
  A simple Rabbit MQ wrapper library based on RabbitMQ.Client which provides facilities to initialize Connection, Pubsliher and Subscriber through Dependency Injection .Net Core projects.
- It also can be used for microservice orchestration and work as mass transit message bus for different services.
+It also can be used for microservice orchestration and work as mass transit message bus for different services.
 
 # How to use?
 
