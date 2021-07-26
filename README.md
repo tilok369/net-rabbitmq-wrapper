@@ -3,7 +3,8 @@
 
 # How to use?
 
-# Direct use without DI
+Direct use without DI
+----------------------
 ```
 var mqConnection = new MqConnection("your_connection_url");
 
@@ -21,4 +22,26 @@ var mqConnection = new MqConnection("your_connection_url");
      Console.WriteLine(message);
      return true;
  });
+```
+
+With Dependency Injection in .NET Core/.NET 5
+---------------------------------------------
+```
+services.AddSingleton<IMqConnection>(new MqConnection("your_connection_url"));
+services.AddSingleton<IMqPublisher>(x => new MqPublisher(x.GetService<IMqConnection>(),
+   "you_exchange_name", ExchangeType.Topic));
+services.AddSingleton<IMqSubscriber>(x => new MqSubscriber(x.GetService<IMqConnection>(),
+    "your_exchange_name", "your_queue_name", "your_routing_key", ExchangeType.Topic));
+```
+
+Publish
+--------
+```
+_publisher.Publish("loan_account.created", JsonConvert.SerializeObject("your_object"));
+```
+
+Subscribe
+---------
+```
+_subscriber.Subscribe(Your_Subscription_Event_Method());
 ```
