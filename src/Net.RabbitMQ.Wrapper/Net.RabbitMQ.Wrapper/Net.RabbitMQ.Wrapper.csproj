@@ -2,6 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Tanjeer Bin Haque</Authors>
+    <Description>A simple Rabbit MQ wrapper library based on RabbitMQ.Client which provides facilities to initialize Connection, Pubsliher and Subscriber through Dependency Injection .Net Core projects.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/tilok369/net-rabbitmq-wrapper</PackageProjectUrl>
+    <PackageTags>RabbitMQ, DotNetCore, RabbitMQWrapper</PackageTags>
+    <PackageReleaseNotes />
   </PropertyGroup>
 
   <ItemGroup>
